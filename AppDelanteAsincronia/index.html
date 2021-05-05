@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+
+    <script>
+
+        function work() {
+            return new Promise((resolve, reject) => {
+                setTimeout(() => {
+                    resolve('Exito en la operacion work1')
+                }, 1000)
+            })
+        }
+
+        function work2() {
+            return new Promise((resolve, reject) => {
+                setTimeout(() => {
+                    resolve('Exito en la operacion work2')
+                }, 1000)
+            })
+        }
+
+        function work3() {
+            return new Promise((resolve, reject) => {
+                setTimeout(() => {
+                    resolve('Exito en la operacion work3')
+                }, 1000)
+            })
+        }
+        ///////////////////////////////////////////////////////////////////////////////////
+        //////////////////////////////////////////////////////////////////////////////////
+        async function workAll(x) {
+            function work() {
+                return new Promise((resolve, reject) => {
+                    setTimeout(() => {
+                        resolve('Exito en la operacion work1')
+                    }, 3000)
+                })
+            }
+            function work2() {
+                return new Promise((resolve, reject) => {
+                    setTimeout(() => {
+                        resolve('Exito en la operacion work2')
+                    }, 2000)
+                })
+            }
+
+            function work3() {
+                return new Promise((resolve, reject) => {
+                    setTimeout(() => {
+                        resolve('Exito en la operacion work3')
+                    }, 1000)
+                })
+            }
+            var work = await work();
+            var work2 = await work2();
+            var work3 = await work3();
+
+            return x + work + work2 + work3
+        }
+
+        workAll(4).then((resp) => console.log(resp))
+
+
+        // work()
+        //     .then((msn) => {
+        //         console.log(msn)
+        //     })
+        //     .then(() => {
+        //         work2()
+        //             .then((msn2) => {
+        //                 console.log(msn2)
+        //             })
+        //             .then(() => {
+        //                 work3()
+        //                     .then((msn3) => {
+        //                         console.log(msn3)
+        //                     })
+        //             })
+        //     })
+
+        //////////////////////////////////////////////////////////////////////////////////////////////////
+        //////////////////////////////////////////////////////////////////////////////////////////////////
+        //////////////////////////////////////////////////////////////////////////////////////////////////
+        // var promise = new Promise((resolve, reject) => {
+        //     setTimeout(() => {
+        //         if (false) {
+        //             resolve('Exito en operacion asincrona')
+        //         } else {
+        //             reject('Error en operacion asincrona')
+        //         }
+        //     }, 3000)
+        // })
+        //     .then((msn) => {
+        //         console.log(msn)
+        //     })
+        //     .catch((msn) => {
+        //         console.log(msn)
+        //     })
+        // console.log('Mensaje sincrono')
+
+        //////////////////////////////////////////////////////////////////////////////////////////////////
+        //////////////////////////////////////////////////////////////////////////////////////////////////
+        //////////////////////////////////////////////////////////////////////////////////////////////////
+
+        //usando api de github con Promise
+        function getLogin(username) {
+
+            const url = `https://api.github.com/users/${username}`
+
+            fetch(url)
+                .then((resp) => resp.json())
+                .then(data => {
+                    console.log(data.login)
+                })
+
+        }
+
+        getLogin('LexferRam')
+
+
+        //////////////////////////////////////////////////////////////////////////////////////////////////
+        //////////////////////////////////////////////////////////////////////////////////////////////////
+        //////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+        // //usando api de github con AsyncAwait
+        // async function getAvatar(username) {
+
+        //     const url = `https://api.github.com/users/${username}`
+        //     const resp = await fetch(url);
+        //     const data = await resp.json();
+
+        //     if (data.status !== 200)//el status exitoso de http es 200
+        //         throw Error('El usuario no existe')
+
+        //     return data.avatar_url
+        //     //si se usa "return" se retorna un promesa no un valor
+        //     //todo lo que retorna una promesa (como los then) se les puede aplicar un .thn()
+
+        // }
+
+        // getAvatar('noexistp')
+        //     .then((avatar) => console.log(avatar))
+        //     .catch((e) => console.log(`Error ${e}`))
+
+
+
+        //////////////////////////////////////////////////////////////////////////////////////////////////
+        //////////////////////////////////////////////////////////////////////////////////////////////////
+        //////////////////////////////////////////////////////////////////////////////////////////////////
+
+        //usando trycahtch en AsyncAwait
+        async function getAvatar(username) {
+
+            const url = `https://api.github.com/users/${username}`
+            const resp = await fetch(url);
+            const data = await resp.json();
+
+            // if (data.status !== 200)
+            //     throw Error('El usuario no existe')
+
+            return data.avatar_url
+            //si se usa "return" se retorna un promesa no un valor
+            //todo lo que retorna una promesa (como los then) se les puede aplicar un .thn()
+
+        }
+        //funcion autoinvocada
+        (async function () {
+            try {
+                const nombre = await getAvatar('LexferRam');
+                console.log(nombre);
+            } catch (e) {
+                console.log(`Error: ${e}`);
+            }
+        })()
+
+        //////////////////////////////////////////////////////////////////////////////////////////////////
+        function resolveAfter2seg(x) {
+            return new Promise(resolve => {
+                setTimeout(() => {
+                    resolve(x)
+                }, 2000)
+            })
+        }
+
+        async function add1(x) {
+            const a = await resolveAfter2seg(20);
+            const b = await resolveAfter2seg(a + 30);
+
+            return x + a + b
+        }
+
+        add1(10).then(v => {
+            console.log(v)
+        })
+        /**********************************************************************************************************/
+        /**********************************************************************************************************/
+        /**********************************************************************************************************/
+        /**********************************************************************************************************/
+        /**********************************************************************************************************/
+        /**********************************************************************************************************/
+        /**********************************************************************************************************/
+
+        //Simulacion de BDs
+        const usuarios = [
+            { id: 1, nombre: 'Ricardo', profesion_id: 1 },
+            { id: 2, nombre: 'Alejandro', profesion_id: 1 },
+            { id: 3, nombre: 'Diego', profesion_id: 2 }
+        ]
+
+        const profesion = {
+            1: 'programador',
+            2: 'disenador'
+        }
+
+        //Simulando llamdos a una BDs
+
+        function getUsuarios(callback) {
+            setTimeout(() => {
+                //es una convencion que el 1er parametro sea el manejo del error pero si no hubo error el callback pasa null
+                callback(null, usuarios)
+            }, 1000)
+        }
+
+        //getUsuarios((err, usuarios) => console.log(usuarios))
+
+        function getUsuario(id, callback) {
+            setTimeout(() => {
+                callback(null, usuarios.filter((usuario) => usuario.id === id)[0])
+            }, 1000)
+        }
+
+        function getProfesion(id, callback) {
+            setTimeout(() => {
+                callback(null, profesion[id])
+            }, 1000)
+        }
+
+        //haciendo el nesting de callbacks
+        /* pasos: pedimos lista de los usuarios, pedimos el usuario especifico(id de la profesion),
+        con el id de la profesion accedemos a la profesion///////en total son 3 llamadas anidadas/////*/
+
+        getUsuarios((err, usuarios) => {
+            //verificando si hay error
+            if (err) return huboError(err)
+            //seleccionamos el id del usuario que queremos
+            const AlejandroId = usuarios[1].id;
+
+            getUsuario(AlejandroId, (err, usuario) => {
+                //seleccionamos el id de la profesion del usuario
+                const profesionId = usuario.profesion_id;
+
+                getProfesion(profesionId, (err, profesion) => {
+                    console.log('La profesion de Alejandro es:', profesion)
+                })
+            })
+        })
+
+//El principal problema de los callback es la anidacion(cuando se tienen muchas funciones asincronas que dependen unas de las otras) de callbacks que
+// pueden llevar a crear "callback hell" la piramide del infierno
+    </script>
+</body>
+
+</html>

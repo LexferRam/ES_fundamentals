@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+
+
+    <script>
+        /*FETCH API permiten realizar peticiones a APIs (estan basadas en promesas)*/
+        fetch('https://reqres.in/api/users')//obtiene todos los usuarios, si se quiere obtener todos los usuarios despues de"users" se coloca /3(numero de usuario)
+            .then(res => {
+                if (res.ok) {
+                    console.log('SUCCESS')
+                } else {
+                    console.log('NOT SUCCESSFULL')
+                }
+                res.json()
+            })//hay que convertir la respuesta a json(la cual retornara otra promesa)
+            .then(data => console.log(data))
+            .catch(error => console.log('ERROR'))
+
+
+
+        ///fetch() recibe un 2do parametro el cual es un objeto que es el tipo metodo http
+        fetch('https://reqres.in/api/users', {
+            method: 'POST',
+            headers: {
+                'Content-type': 'application/json'
+            },
+            body: JSON.stringify({
+                name: 'Lexfer Ramirez'
+            })
+        }).then(res => {
+            return res.json()
+        })
+            .then(data => console.log(data))
+            .catch(error => console.log('ERROR'))
+
+    </script>
+</body>
+
+</html>

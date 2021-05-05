@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        const items = [
+            { name: 'bike', price: 100 },
+            { name: 'TV', price: 200 },
+            { name: 'album', price: 10 },
+            { name: 'Book', price: 5 },
+            { name: 'Phone', price: 500 },
+            { name: 'Computer', price: 1000 },
+            { name: 'Keyboard', price: 25 }
+        ];
+        // filter(): retorna un array de objs
+        const filteredItem = items.filter((item) => {
+            return item.price <= 100
+        });
+
+        // map(): retorna un array de objetos
+        const map = items.map((item) => {
+            return item.name
+        });
+
+        // find(): retorna la 1ra coincidencia
+        const found = items.find((item) => {
+            return item.name === 'TV'
+        });
+
+        // forEach(): ejecuta una funcion por cada item
+        items.forEach((item) => {
+            console.log(`El nombre del producto es ${item.name} y su precio es ${item.price}$`)
+        })
+
+        // some(): retorna true si al menos hay una coincidencia 
+        const some = items.some((item) => {
+            return item.name === 'Book'
+        });
+        if (some) {
+            console.log('hay una coincidencia')
+        } else {
+            console.log('No hay coincidencia')
+        }
+
+        // every():retorna tru si todos los elements del array cumplen una condicion
+        const everyElement = items.every((item) => {
+            return item.price < 1
+        });
+        if (everyElement) {
+            console.log('Todos los elementos tienen un precio menor a 10000')
+        } else {
+            console.log('los precios son altos')
+        }
+
+        // includes():retorna tru o false si el parametro esta en el array
+        const numbers = [1, 2, 3, 8, 9, 4, 3, 12, 34, 56]
+        const included = numbers.includes(5);
+        if (included) {
+            console.log('El nro 5 esta en el array')
+        } else {
+            console.log('El nro 5 no esta en el array')
+        }
+
+        // reduce():suma los valora de un array
+        const total = numbers.reduce((currentTotal, number) => {
+            return number + currentTotal
+        }, 0);
+        console.log(total)
+
+        // sort(): ordena los elementos de un array
+        const sortedNumbers = numbers.sort((a, b) => b - a)
+        console.log(sortedNumbers)
+
+
+
+    </script>
+</body>
+
+</html>

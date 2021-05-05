@@ -1,0 +1,12 @@
+PASOS PARA OBTENER API KEY GOOGLE MAPS 
+1.-Ir a console Cloud Google Maps e identificarse
+2.- Crear un proyecto y detenerse hasta donde pide datos tarjeta de credito
+3.-Ir a homepageverificar que estas en el proyecto creado
+4.-Ir a API services y luego a credenciales y crearlas para apikey
+5.-Aqui te muestra la api key creada, copiala y guardala
+
+AHORA SE NECESITAN HABILITAR OTROS SERVICIOS PARA QUE ESTA FUNCIONE
+6.-Ir a la opcion de librerias y se mostrarantodos los servivios de google Maps
+7.- habilitar: maps js API, maps SDK for android y places API y Maps embed API.
+
+FINALMENTE RESTRINGE TU API KEY.

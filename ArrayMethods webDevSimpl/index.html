@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+
+    <script>
+
+        const items = [
+            { name: 'Bike', price: 100 },
+            { name: 'TV', price: 200 },
+            { name: 'Album', price: 10 },
+            { name: 'Book', price: 5 },
+            { name: 'Phone', price: 500 },
+            { name: 'Computer', price: 1000 },
+            { name: 'Keyboard', price: 25 }
+        ];
+
+        /*Filter Method (devuelve los objs de un array que cumple una condicion)*/
+        const filterItems = items.filter((item) => {
+            return item.price <= 100
+        });
+
+        console.log(filterItems);
+        console.log(items);
+
+        /*Map Method (itera sobre los valores de un array
+        y devuelve la propiedad indicada de todos los objs)*/
+        const filterNames = items.map((item) => {
+            return item.name
+        });
+        console.log(filterNames);
+
+        /*Find Method (itera sobre los valores de un array y devuelve el que cumplan una condicion, retorna el 1er obj que 
+        cumplan la condicion )*/
+        const foundItem = items.find((item) => {
+            return item.name == 'Book'
+        });
+        console.log(foundItem);
+
+        /*forEach() es una funcion que toma como parametro un funcion que se le aplicara a cada elemento del array */
+        items.forEach((item) => {
+            console.log(item.name)
+        });
+
+        /*some() function, retorna true o false si algun elemento cumple la condicion*/
+        const hasInexpensiveItems = items.some((item) => {
+            return item.price <= 0
+        });
+        console.log(hasInexpensiveItems)
+
+        /*every() function, retorna true o false si todos los elementos cumplen la condicion*/
+        const hasInexpensiveItems1 = items.every((item) => {
+            return item.price <= 1000
+        });
+        console.log(hasInexpensiveItems1)
+
+        /*reduce() function, suma el total de los precios de totodos los objs del array*/
+        const total = items.reduce((currentTotal, item) => {
+            return item.price + currentTotal
+        }, 0);//este cero es para inicializar currentToltal en cero
+        console.log(total)
+
+        /*include(), retorna true o false si el elemento de include esta en el array*/
+        const items2 = [1, 2, 3, 4, 5];
+
+        const includesTwo = items2.includes(2)
+        console.log('El array contiene el elemento:' + includesTwo)
+
+
+
+
+    </script>
+</body>
+
+</html>

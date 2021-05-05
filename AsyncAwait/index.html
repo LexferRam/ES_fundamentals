@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Async Await practice</title>
+</head>
+
+<body>
+
+</body>
+
+<script>
+
+    /*//////////////////////////////EJEMPLO CON PROMESA////////////////////////*/
+    /*/////////////////////////////////////////////////////////////////////////*/
+    function makeRequest(location) {
+        return new Promise((resolve, reject) => {
+            console.log(`Making request to ${location}`)
+            if (location === 'Google') {
+                resolve('Google says hi')
+            } else {
+                reject('We can only talk to Google')
+            }
+        })
+    }
+    function processRequest(response) {
+        return new Promise((resolve, reject) => {
+            console.log('Processing response')
+            resolve(`Extra information + ${response}`)
+        })
+    }
+    //probrar pasandole Facebook para caer en el catch
+    makeRequest('Google')
+        .then(response => {
+            console.log('Response Receive');
+            return processRequest(response)
+        })
+        .then(processedResponse => {
+            console.log(processedResponse)
+        })
+        .catch(err => {
+            console.log(err)
+        });
+
+    /*De esta manera las funciones se ejecutan en el orden que queremos*/
+    /*/////////////////////////////////////////////////////////////////////////*/
+    /*/////////////////////USANDO AsyncAwait/////////////////////////////////*/
+
+    async function doWork() {
+
+        try {
+            const response = await makeRequest('FaceBook');
+            console.log('Response Received');
+            const processedResponse = await processRequest(response);
+            console.log(processedResponse);
+
+        } catch (error) {
+            console.log(error)
+        }
+
+    }
+    doWork();
+
+
+
+
+    async function Tarea() {
+        try {
+            const response= await funcion("param")
+            console.log('Response receive')
+            const
+        } catch (err) {
+            console.log(err)
+        }
+    }
+
+</script>
+
+</html>

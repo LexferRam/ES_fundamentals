@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+
+
+
+    <script>
+
+        /*La idea de la desestructuracion es tomar un objeto o un arreglo y convertirlo 
+        en una variable mas pequena o elemento*/
+
+        const alphabet = ['A', 'B', 'C', 'D', 'E', 'F'];
+        const numbers = ['1', '2', '3', '4', '5', '6'];
+
+        // const a = alphabet[0];
+        // const b = alphabet[1];
+
+        /*una forma mas de sencilla de asignar los valores de un array a una variable
+        es usando la desestructuracion*/
+        // const [a, , c, ...rest] = alphabet;
+        //como no le colocamos la b y dejamos su espacio, quiere decir que no estamos tomandolo en cuenta
+        //el parametro (...rest) toma el valor del resto de elementos del array
+        // console.log(a);
+        // console.log(c);
+        // console.log(rest)
+
+        //operacdor spread
+        // const newArray = [...alphabet, ...numbers];
+        // console.log(newArray)
+
+        //la manera en la que se hacia sin el operador spread
+        //const newArray = alphabet.concat(numbers)
+
+        /*Otro uso de spread esta en la functiones y se retornan mas de 1 parametro*/
+        /*/////////////////////////////////////////////////////////////////////////*/
+
+        function sunmAndMultiply(a, b) {
+            return [a + b, a * b, a / b]//si no se pasa a/b se imprimira 'No division'
+        }
+        const [sum, multiply, division = 'No division'] = sunmAndMultiply(2, 3);
+
+        console.log(sum);
+        console.log(multiply);
+        console.log(division);
+
+        /*//////////////////////////////////////////////////////////////////////////////////////////////////////////*/
+        /*//////////////////////////////////////////////////////////////////////////////////////////////////////////*/
+        /*//////////////////DESESTRUCTURACION DE OBJETOS////////////////////////////////////////////////////////////*/
+
+
+        const personOne = {
+            name: 'Lexfer',
+            age: 24,
+            address: {
+                city: 'Somewhere',
+                state: 'One of three'
+            }
+        }
+
+        const personTwo = {
+            name: 'Sally',
+            favoriteFood: 'Watermelon',
+            age: 32,
+            address: {
+                city: 'Somewhere',
+                state: 'Another one of them'
+            }
+        }
+
+        //los valores que se definen dentro de la declaracion son los valores por defectos
+        // const { name: firstName = 'John', age, favoriteFood = 'Rice' } = personTwo;
+        // console.log(firstName)
+        // console.log(age)
+        // console.log(favoriteFood)
+
+        //usando el operador rest 
+        const { name: firstName = 'John', ...rest } = personTwo;
+        console.log(firstName);
+        console.log(rest);
+
+        //accediendo a city
+        // const { name: firstName = 'John', addres: { city } } = personTwo;
+        // console.log(firstName)
+        // console.log(city)
+
+        //otro uso creando un objeto usando otros dos, el ultimo obj anadido sobreecribe propiedades repetidas
+        //const personThree = { ...personOne, ...personTwo }
+
+        //USANDOLO EN FUNCIONES
+        function printUser({ name, age, favoriteFood = 'watermelon' }) {
+            console.log(`Name is ${name}, Age is ${age} food is ${favoriteFood}`);
+        }
+        printUser(personOne);
+
+
+
+
+    </script>
+</body>
+
+</html>

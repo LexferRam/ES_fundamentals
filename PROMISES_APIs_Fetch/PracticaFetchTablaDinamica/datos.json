@@ -1,0 +1,33 @@
+[
+    {
+        "ID": 1,
+        "Nombre": "Lexfer",
+        "Apellido": "Ramirez",
+        "Estado": true
+    }, {
+        "ID": 2,
+        "Nombre": "Francisco",
+        "Apellido": "Cano",
+        "Estado": true
+    }, {
+        "ID": 3,
+        "Nombre": "Pedro",
+        "Apellido": "Rodriguez",
+        "Estado": false
+    }, {
+        "ID": 4,
+        "Nombre": "Antonio",
+        "Apellido": "Perez",
+        "Estado": true
+    }, {
+        "ID": 5,
+        "Nombre": "Veronica",
+        "Apellido": "Gonzale",
+        "Estado": true
+    }, {
+        "ID": 6,
+        "Nombre": "Vanessa",
+        "Apellido": "Zanotty",
+        "Estado": false
+    }
+]

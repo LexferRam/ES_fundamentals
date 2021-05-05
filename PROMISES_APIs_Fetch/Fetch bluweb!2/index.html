@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <title>Fetch API</title>
+</head>
+
+<body>
+    <div class="container my-5 text-center">
+        <button class="btn btn-danger w-100" onclick="traer()">Obtener</button>
+        <div class="mt-5" id="contenido">
+
+        </div>
+    </div>
+
+
+
+    <script>
+
+
+        var contenido = document.querySelector('#contenido');
+        function traer() {
+
+            fetch('https://randomuser.me/api/')
+                .then(res => res.json())
+                .then(data => {
+
+                    contenido.innerHTML = `
+                    <img src="${data.results['0'].picture.large}" width="100px" class="img-fluid rounded-circle">
+                    <p>Nombre: ${data.results['0'].name.last} </p>
+                    `;
+
+                })
+
+        }
+
+
+
+    </script>
+</body>
+
+</html>

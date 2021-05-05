@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <!--axios, Promise based HTTP client for the browser and node.js -->
+    <title>My Geocode App</title>
+</head>
+
+<body>
+    <!-- Ir a Google Cloud Platform y entrar a mi cuenta con lexferramirez@gmail.com y ahi selecciona la API a usar,
+    la API a usar en es esta practica es Geocoding API
+
+1-1er paso: se debe ir a la consola de google cloud y crear un proyecto.
+2-Buscar la opcion de habilitar API(habilitar APIS y servicios) para el proyecto creado(nombre del proyecto en google cloud: GeocodingAPIproyect)
+(nombre de la api:)
+3-Ir a apis "APIs de google map" y seleccionar "geocoding API" pra luego habilitarla (seleccionar habilitar)
+4-Hay que crear las las credenciales,en el menu de arriba a la izquierda seleciionar "APIS y servicios" luego seleccionar "Credenciales" y luego "crear credenciales",
+en el menu que se abre sellecionnar "Clave de API"
+
+-->
+    <div class="container">
+
+        <div id="formatted-address"></div>
+    </div>
+
+
+
+
+    <script>
+        geocode();
+
+        //call geocode
+        function geocode() {
+            var location = '22 Main st Boston MA';
+            axios.get('https://maps.googleapis.com/maps/api/geocode/json', {
+                params: {
+                    address: location,
+                    key: 'AIzaSyAKQmFsUBp7ZFAIM0Mr1iFtTOqa755N18o'
+                }
+            })
+                .then(function (response) {
+                    //log full response
+                    console.log(response)
+                    //formatted address
+                    // var fomattedAddress = response.data.results[0].formatted_address;
+                    // var fomattedAddressOutput = `
+                    // <ul class="list-group">
+                    //     <li class="list-group-item">${formattedAddress}</li>
+                    // </ul>
+                    // `;
+
+                    //output to add 
+                    // document.getElementById('formatted-address').innerHTML = fomattedAddressOutput;
+
+                })
+                .catch(function (error) {
+                    console.log(error)
+                })
+        }
+    </script>
+</body>
+
+</html>

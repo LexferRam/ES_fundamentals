@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Google Map</title>
+
+    <style>
+        #map {
+            height: 400px;
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>My Google Map</h1>
+    <div id="map"></div>
+
+    <script>
+
+        function initMap() {
+
+            var options = {
+                zoom: 8,
+                center: { lat: 10.491, lng: -66.902 }
+            }
+
+            //new Map
+            var map = new google.maps.Map(document.getElementById('map'), options);
+            //listen for click on mao
+            google.maps.event.addListener(map, 'click', function (e) {
+                addMarker({ coords: event.latLng });
+            });
+
+            /*
+            //new marker
+            var marker = new google.maps.Marker({
+                position: { lat: 10.4722605, lng: -66.8015518 },
+                map: map,
+                //icon: '' personalizar el marcador en el mapa
+            });
+
+            var infoWindow = new google.maps.infoWindow({
+                content: '<h1>Hola Lexfer desde Caracas</h1>'
+            })
+            marker.addlistener('click', function () {
+                infoWindow.open(map, marker);
+            });
+            */
+            //array of markers
+            var markers = [
+                {
+                    coords: { lat: 10.4722605, lng: -66.8015518 },
+                    //iconImage:
+                    content: '<h1>Caracas</h1>'
+                },
+                {
+                    coords: { lat: 10.4722605, lng: -66.8015518 },
+                    //iconImage:
+                    content: '<h1>Caracas</h1>'
+                }
+            ];
+
+            //loop through markers
+            for (var i = 0; i < markers.length; i++) {
+                addMarker(markers[i])
+                    ;
+            }
+
+
+
+            //add Marker function
+            function addMarker(coords) {
+                var marker = new google.maps.Marker({
+                    position: coords,
+                    map: map,
+                    // icon: props.iconImage
+
+                });
+                //check for custom icons
+                if (props.iconImage) {
+                    marker.setIcon(props.iconImage);
+                }
+                if (props.content) {
+                    var infoWindow = new google.maps.infoWindow({
+                        content: props.content
+                    })
+                    marker.addlistener('click', function () {
+                        infoWindow.open(map, marker);
+                    });
+                }
+
+            }
+        }
+
+    </script>
+    <!-- The async attribute lets the browser render the rest of your website while the Maps JavaScript API loads. -->
+    <script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBNypNClAmeBiKfnkrirDahK9_4ha86xmI&callback=initMap">
+        </script>
+</body>
+
+</html>
+<!-- IR a google cloud platform y ahi se pueden obtener las claver creadas -->
+<!-- ir a Google Maps Platform, Documentation, Maps Javascript API, 
+Get a API Key, seguir los pasos de 'Get the API key', en el 1er paso ir a
+ Google Cloud Platform Console., click en 'crear proyecto',colocarle el nobre al proyecto,
+seleccionar el menu superior izq y dar click en 'APIs y servicios' y luego en 'credenciales',
+en la pg de 'credenciales' dar click en 'crear credenciales' y luego 'clave de API, se desplegara un modal con la API Key',
+y por ultimo Click Close.
+The new API key is listed on the Credentials page under API keys.
+(Remember to restrict the API key before using it in production.)  -->
+
+
+<!-- llave(credencial) creada en para este proyecto, nombre del proyecto: testproyect -->
+<!-- AIzaSyBNypNClAmeBiKfnkrirDahK9_4ha86xmI  `para usar esta clave en tu app transfierela con el parametro`: key=API_KEY -->
